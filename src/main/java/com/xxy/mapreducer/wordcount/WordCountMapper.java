@@ -9,10 +9,13 @@ import java.io.IOException;
 public class WordCountMapper extends Mapper<LongWritable, Text,Text, LongWritable> {
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-        System.out.println(value);
         String[] split = value.toString().split(" ");
+        // 全局计数器行数
+        context.getCounter(GlobalCounter.CounterWordCountC.COUNT_LINES).increment(1);
+
         for (String s : split) {
-            System.out.println(s);
+            // 全局计算器 单词数
+            context.getCounter(GlobalCounter.CounterWordCountC.COUNT_WORDS).increment(1);
             context.write(new Text(s),new LongWritable(1));
         }
     }
