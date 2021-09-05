@@ -29,6 +29,8 @@ public class WordCountApp {
         job.setMapperClass(WordCountMapper.class);
         job.setReducerClass(WordCountReducer.class);
 
+        job.setCombinerClass(WordCountCombiner.class);
+
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(LongWritable.class);
 

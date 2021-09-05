@@ -1,6 +1,7 @@
 package com.xxy.mapreducer.flow;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
@@ -24,7 +25,14 @@ public class FlowApp {
         job.setJobName("FlowSum");
 
         FileInputFormat.addInputPath(job,new Path("hdfs://node01:9000/tmp/flow/datafile/flow.log"));
-        FileOutputFormat.setOutputPath(job,new Path("hdfs://node01:9000/tmp/flow/out_sum"));
+
+        Path outputPath = new Path("hdfs://node01:9000/tmp/flow/out_sum");
+        FileSystem fs = FileSystem.get(conf);
+        if (fs.exists(outputPath)) {
+            fs.delete(outputPath, true);
+        }
+
+        FileOutputFormat.setOutputPath(job,outputPath);
 
 
         job.setMapperClass(FlowMapper.class);

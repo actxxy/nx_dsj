@@ -91,11 +91,6 @@ public class FlowBean implements WritableComparable<FlowBean> {
 
     @Override
     public String toString() {
-        return "Flow{" +
-                "phone='" + phone + '\'' +
-                ", upFlow=" + upFlow +
-                ", downFlow=" + downFlow +
-                ", sumFlow=" + sumFlow +
-                '}';
+        return phone + '\t' + upFlow + '\t' + downFlow + '\t'+  sumFlow;
     }
 }
