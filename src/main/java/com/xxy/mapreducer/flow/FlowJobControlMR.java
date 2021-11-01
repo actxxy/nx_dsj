@@ -20,8 +20,6 @@ public class FlowJobControlMR {
         conf.addResource("hadoop/hdfs-site.xml");
         System.setProperty("HADOOP_USER_NAME", "root");
 
-
-
         Job sumJob = Job.getInstance(conf);
         sumJob.setJobName("FlowSum");
 
