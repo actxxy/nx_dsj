@@ -4,16 +4,18 @@ import com.alibaba.fastjson.{JSON, JSONObject}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
-
+/**
+ * spark case class
+ */
 
 object DataFrameTest1 {
   case class Stu(var sid:String,var name:String,var age:Int)
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder.appName("DataFrameTest1").master("local").getOrCreate()
+    val spark = SparkSession.builder.appName("DataFrameTest1").master("local").enableHiveSupport().getOrCreate()
     val sourceRdd: RDD[String] = spark.sparkContext.textFile("D:\\work\\train_data\\nx_dsj\\sparksql\\stu.txt")
     val stuRdd: RDD[Stu] = sourceRdd.map(
       row => {
-        var splits = row.split(",")
+        val splits = row.split(",")
         Stu(splits(0), splits(1), splits(2).toInt)
       }
     )

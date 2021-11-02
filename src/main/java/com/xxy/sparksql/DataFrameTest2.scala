@@ -4,7 +4,9 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 
-
+/**
+ * sparksql dataframe schema
+ */
 object DataFrameTest2 {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("DataFrameTest1").master("local").getOrCreate()
